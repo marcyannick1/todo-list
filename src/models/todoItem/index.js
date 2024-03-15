@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../config/sequelize");
+const TodoList =  require("../todoList")
 
-const User = sequelize.define("TodoItem", {
+const TodoItem = sequelize.define("TodoItem", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -19,6 +20,21 @@ const User = sequelize.define("TodoItem", {
         type: DataTypes.ENUM('a faire', 'en cours', "termine"),
         allowNull: false,
     },
+    todoListId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: TodoList,
+            key: "id",
+        },
+    },
 });
 
-module.exports = User
+TodoItem.belongsTo(TodoList, { foreignKey: "todoListId", as: "todolist" });
+TodoList.hasMany(TodoItem, { foreignKey: "todoListId" });
+
+// (async () => {
+//     await sequelize.sync({ force: true });
+//   })();
+
+module.exports = TodoItem
