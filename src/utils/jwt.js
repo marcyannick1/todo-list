@@ -29,22 +29,6 @@ const jwtVerify = async (token) => {
 };
 
 const checkIsAuth = async (req, res, next) => {
-    // try {
-    //     if(req.originalUrl.includes(process.env.API_PATH)){
-    //         const authHeader = req.headers['authorization']
-    //         const token = authHeader.split(" ")[1]
-    //         const isValid = await jwtVerify(token)
-    //         if (!isValid){
-    //             return res.status(401).json({msg: 'Unauthorized'})
-    //         }
-    //         next()
-    //     } else {
-    //         next()
-    //     }
-    // } catch (e) {
-    //     console.log(e.message)
-    //     return res.status(400).json({msg: 'BAD REQUEST'})
-    // }
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
         if (!await jwtVerify(token)){
