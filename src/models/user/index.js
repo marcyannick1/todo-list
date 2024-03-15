@@ -24,15 +24,11 @@ const User = sequelize.define("User", {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    token: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
 });
 
-sequelize
-    .sync()
-    .then(() => {
-        console.log('La table "Users" a été synchronisée avec succès.');
-    })
-    .catch((err) => {
-        console.error('Erreur lors de la synchronisation de la table "Users" :', err);
-    });
 
 module.exports = User

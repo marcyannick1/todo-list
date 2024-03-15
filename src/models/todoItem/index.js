@@ -21,13 +21,4 @@ const User = sequelize.define("TodoItem", {
     },
 });
 
-sequelize
-    .sync()
-    .then(() => {
-        console.log('La table "TodoItem" a été synchronisée avec succès.');
-    })
-    .catch((err) => {
-        console.error('Erreur lors de la synchronisation de la table "TodoItem" :', err);
-    });
-
 module.exports = User
